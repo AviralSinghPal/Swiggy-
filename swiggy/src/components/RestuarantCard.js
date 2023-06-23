@@ -6,19 +6,19 @@ const RestuarantCard = ({restaurant}) => {
   return (
     <>
     
-      <div class="card">
+      <div className="card">
         <div >
-            <img class="card-img" src={image_url+restaurant.data?.cloudinaryImageId} />
+            <img className="card-img" src={image_url+restaurant.data?.cloudinaryImageId} />
         </div>
-        <div class="card-info">
-          <p class="text-title">{restaurant.data?.name}</p>
-          <p class="text-body">{restaurant.data?.locality}</p>
-          <p class="text-body">{"Avg. Rating: "+restaurant.data?.avgRating+"⭐"}</p>
-          <p class="text-body">{restaurant.data.cuisines.join(", ")}</p>
+        <div className="card-info">
+          <p className="text-title">{restaurant.data?.name}</p>
+          <p className="text-body">{restaurant.data?.locality}</p>
+          <p className="text-body">{"Avg. Rating: "+restaurant.data?.avgRating+"⭐"}</p>
+          <p className="text-body">{restaurant.data.cuisines.join(", ")}</p>
     
         </div>
-        <div class="card-footer">
-          <span class="text-title">{"Price: "+ restaurant.data.costForTwo/100 +" for two"}</span>
+        <div className="card-footer">
+          <span className="text-title">{"Price: "+ restaurant.data.costForTwo/100 +" for two"}</span>
         </div>
       </div>
     </>
