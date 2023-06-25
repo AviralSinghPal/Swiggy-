@@ -1,5 +1,4 @@
 import { image_url } from "./config";
-import { restaurant_list } from "./config";
 
 const RestuarantCard = ({restaurant}) => {
     // console.log(props);
@@ -8,7 +7,7 @@ const RestuarantCard = ({restaurant}) => {
     
       <div className="card">
         <div >
-            <img className="card-img" src={image_url+restaurant.data?.cloudinaryImageId} />
+            <img alt="product pic" className="card-img" src={image_url+restaurant.data?.cloudinaryImageId} />
         </div>
         <div className="card-info">
           <p className="text-title">{restaurant.data?.name}</p>
@@ -22,7 +21,7 @@ const RestuarantCard = ({restaurant}) => {
         </div>
       </div>
     </>
-  );
+  );   
 };
 
 export default RestuarantCard;

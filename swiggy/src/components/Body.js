@@ -1,8 +1,9 @@
 // import SearchFunctionlity from "../utils/SearchFunctionlity";
 import RestuarantCard from "./RestuarantCard";
-import { restaurant_list } from "./config";
+// import { restaurant_list } from "./config";
 import {useEffect, useState} from "react";
 import React from "react";
+import Shimmer from "./ShimmerUI";
 
 function filterData(searchText, restaurants) {
   const filteredData = restaurants.filter((res) => {
@@ -15,14 +16,41 @@ function filterData(searchText, restaurants) {
   console.log(filteredData);
 
   return filteredData;
-}
+};
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
-  const [restaurant ,setRestaurants] = useState(restaurant_list)
+  const [restaurant ,setRestaurants] = useState()
   // const srchTxt="asdas"
+  console.log("render");
+  useEffect(()=>{
+    console.log("getting restuarrant from swiggy api");
+    getRestaurants();
+  },[])
+
+
+  async function getRestaurants(){
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.67616&lng=77.502442&page_type=DESKTOP_WEB_LISTING");
+    const json  = await data.json();
+    console.log(json);
+    setRestaurants(json.data.cards[2].data.data.cards);
+  }
+
+  const handleSearch = () => {
+    const data = filterData(searchText, restaurant);
+    console.log("data: " + data);
+    setRestaurants(data);
+  };
   
-  return (
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+  
+  //if restuarants aren't present hen load shimmer UI else load body
+
+  return (!restaurant)?<Shimmer />: (
     <>
       <div className="search-container">
         <input
@@ -33,24 +61,19 @@ const Body = () => {
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
-
+          onKeyPress={handleKeyPress}
         />
         <button
           className="search-btn"
-          onClick={() => {
-            //need to filter the data
-            const data = filterData(searchText, restaurant);
-            console.log("data:" +data);
-            // update the state - restaurants
-            setRestaurants(data);
-          }}
+          onClick={handleSearch}
+          
         >
           Search
         </button>
       </div>
-      <div className="res-cards">
+      <div  className="res-cards">
         {restaurant.map((res) => {
-          return <RestuarantCard restaurant={res} />;
+          return <RestuarantCard key={res.data.id} restaurant={res} />;
         })}
       </div>
     </>
