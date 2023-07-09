@@ -1,6 +1,7 @@
 
 var Header = () =>
 {
+    console.log("loaded Header");
     return(
         <>
         <div className="header">

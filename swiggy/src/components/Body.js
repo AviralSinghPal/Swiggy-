@@ -33,7 +33,7 @@ const Body = () => {
     const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.67616&lng=77.502442&page_type=DESKTOP_WEB_LISTING");
     const json  = await data.json();
     console.log(json);
-    setRestaurants(json.data.cards[2].data.data.cards);
+    setRestaurants(json.data?.cards[0]?.data?.data?.cards);
   }
 
   const handleSearch = () => {
@@ -73,7 +73,7 @@ const Body = () => {
       </div>
       <div  className="res-cards">
         {restaurant.map((res) => {
-          return <RestuarantCard key={res.data.id} restaurant={res} />;
+          return <RestuarantCard key={res.data?.id} restaurant={res} />;
         })}
       </div>
     </>
