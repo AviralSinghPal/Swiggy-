@@ -4,6 +4,7 @@ import RestuarantCard from "./RestuarantCard";
 import {useEffect, useState} from "react";
 import React from "react";
 import Shimmer from "./ShimmerUI";
+import { restaurant_list } from "./config";
 
 function filterData(searchText, restaurants) {
   const filteredData = restaurants.filter((res) => {
@@ -20,7 +21,7 @@ function filterData(searchText, restaurants) {
 
 const Body = () => {
   const [searchText, setSearchText] = useState("");
-  const [restaurant ,setRestaurants] = useState()
+  const [restaurant ,setRestaurants] = useState(restaurant_list)
   // const srchTxt="asdas"
   console.log("render");
   useEffect(()=>{
